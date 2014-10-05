@@ -25,7 +25,7 @@ public class FunctionalTest {
     public void listComputersOnTheFirstPage() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-               Result result = callAction(controllers.routes.ref.Application.list(0, "name", "asc", ""));
+               Result result = callAction(controllers.routes.ref.Books.list(0, "name", "asc", ""));
 
                assertThat(status(result)).isEqualTo(OK);
                assertThat(contentAsString(result)).contains("574 computers found");
@@ -37,7 +37,7 @@ public class FunctionalTest {
     public void filterComputerByName() {
         running(fakeApplication(), new Runnable() {
            public void run() {
-               Result result = callAction(controllers.routes.ref.Application.list(0, "name", "asc", "Apple"));
+               Result result = callAction(controllers.routes.ref.Books.list(0, "name", "asc", "Apple"));
 
                assertThat(status(result)).isEqualTo(OK);
                assertThat(contentAsString(result)).contains("13 computers found");
@@ -49,7 +49,7 @@ public class FunctionalTest {
     public void createANewComputer() {
         running(fakeApplication(), new Runnable() {
             public void run() {
-                Result result = callAction(controllers.routes.ref.Application.save());
+                Result result = callAction(controllers.routes.ref.Books.save());
 
                 assertThat(status(result)).isEqualTo(BAD_REQUEST);
                 
@@ -59,7 +59,7 @@ public class FunctionalTest {
                 data.put("company.id", "1");
                 
                 result = callAction(
-                    controllers.routes.ref.Application.save(), 
+                    controllers.routes.ref.Books.save(), 
                     fakeRequest().withFormUrlEncodedBody(data)
                 );
                 
@@ -71,7 +71,7 @@ public class FunctionalTest {
                 data.put("introduced", "2011-12-24");
                 
                 result = callAction(
-                    controllers.routes.ref.Application.save(), 
+                    controllers.routes.ref.Books.save(), 
                     fakeRequest().withFormUrlEncodedBody(data)
                 );
                 
@@ -79,7 +79,7 @@ public class FunctionalTest {
                 assertThat(redirectLocation(result)).isEqualTo("/computers");
                 assertThat(flash(result).get("success")).isEqualTo("Computer FooBar has been created");
                 
-                result = callAction(controllers.routes.ref.Application.list(0, "name", "asc", "FooBar"));
+                result = callAction(controllers.routes.ref.Books.list(0, "name", "asc", "FooBar"));
                 assertThat(status(result)).isEqualTo(OK);
                 assertThat(contentAsString(result)).contains("One computer found");
                 
