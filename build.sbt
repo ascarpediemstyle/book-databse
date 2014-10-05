@@ -1,4 +1,4 @@
-name := "__book-database"
+name := "book-database"
 
 version := "1.0"
 
