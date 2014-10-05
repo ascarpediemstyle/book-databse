@@ -10,25 +10,33 @@ import play.data.validation.*;
 import com.avaje.ebean.*;
 
 @Entity 
-@Table(name="t_book") 
+@Table(name=Book.TblDef.TABLE_NAME) 
 public class Book extends Model {
   
   private static final long serialVersionUID = 1L;
+  
+  public static class TblDef{
+	 public static final String TABLE_NAME = "t_book";
+	 public static final String BOOK_ID = "book_id";
+	 public static final String BOOK_NAME = "book_name";
+  }
 
   @Id
-  @Column(name="book_id", columnDefinition="SERIAL")
+  @Column(name=TblDef.BOOK_ID, columnDefinition="SERIAL")
   public Long bookId;
   
   @Constraints.Required
-  @Column(name="book_name")
+  @Column(name=TblDef.BOOK_NAME)
   public String bookName;
+  
+  @Constraints.Required  
+  public int rank;
   
   @Formats.DateTime(pattern="yyyy-MM-dd")
   public Date introduced;
   
   @Formats.DateTime(pattern="yyyy-MM-dd")
-  public Date discontinued;
-  
+  public Date discontinued;  
  
     
   public static Finder<Long, Book> find = new Finder<Long, Book>(

@@ -1,4 +1,6 @@
-@(currentPage: com.avaje.ebean.Page[Book], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(currentPage: com.avaje.ebean.Page[Book],currentSortBy :String , currentOrder :String,currentFilter :String)
+
+
 
 @****************************************
 * Helper generating navigation links    *
@@ -22,7 +24,9 @@
     }
     
     // Generate the link
-    routes.Application.list(newPage, sortBy, order, currentFilter)
+    var s = sortBy
+    var o = order
+    routes.Books.list(newPage,s, o,currentFilter)
     
 }
 
@@ -52,7 +56,7 @@
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         </form>
         
-        <a class="btn success" id="add" href="@routes.Application.create()">Add a new computer</a>
+        <a class="btn success" id="add" href="@routes.Books.create()">Add a new computer</a>
         
     </div>
     
@@ -77,7 +81,7 @@
 
                 @for(book <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Application.edit(book.bookId)">@book.bookName</a></td>
+                        <td><a href="@routes.Books.edit(book.bookId)">@book.bookName</a></td>
                         <td>
                             @if(book.introduced == null) {
                                 <em>-</em>

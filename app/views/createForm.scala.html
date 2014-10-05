@@ -8,7 +8,7 @@
     
     <h1>Add a book</h1>
     
-    @form(routes.Application.save()) {
+    @form(routes.Books.save()) {
         
         <fieldset>
         
@@ -28,7 +28,7 @@
         
         <div class="actions">
             <input type="submit" value="Create this book" class="btn primary"> or 
-            <a href="@routes.Application.list()" class="btn">Cancel</a> 
+            <a href="@routes.Books.list()" class="btn">Cancel</a> 
         </div>
         
     }
