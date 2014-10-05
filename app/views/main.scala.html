@@ -5,17 +5,40 @@
     <head>
         <title>Books database</title>
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")"> 
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        @*<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/book_main.css")">*@
+        
     </head>
     <body>
-        
-        <header class="topbar">
-            <h1 class="fill">
-                <a href="@routes.Application.index()">
-                    Play sample application &mdash; Book database
-                </a>
-            </h1>
+    
+     <header class="topbar">
+     	@*<a href="@routes.Projects.index" id="logo"><span>Zen</span>tasks</a>
+          <h1 class="fill">
+              <a href="@routes.Application.index()">
+                  Play sample application &mdash; Book database
+              </a>
+          </h1>*@
+       
+   
+            
+            <dl id="user">
+                @*<dt>@user.name <span>(@user.email)</span></dt>*@
+                <dd>
+                    <a href="@routes.Application.logout()">Logout</a>
+                </dd>
+            </dl>
         </header>
+        <nav>
+            <h4 class="dashboard"><a href="#/">Dashboard</a></h4>
+            <ul id="projects">@*
+                @projects.groupBy(_.folder).map {
+                    case (group, projects) => {
+                        @views.html.projects.group(group, projects)
+                    }
+                }*@
+            </ul>
+            <button id="newGroup">New group</button>
+        </nav>
         
         <section id="main">
             @content

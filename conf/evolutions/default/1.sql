@@ -6,6 +6,7 @@
 create table t_book (
   book_id                   SERIAL not null,
   book_name                 varchar(255),
+  rank                      integer,
   introduced                timestamp,
   discontinued              timestamp,
   constraint pk_t_book primary key (book_id))

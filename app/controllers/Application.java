@@ -1,5 +1,6 @@
 package controllers;
 
+import play.Routes;
 import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
@@ -77,5 +78,6 @@ public class Application extends Controller {
     public static Result index() {
         return GO_HOME;
     }
+    
 }
             
