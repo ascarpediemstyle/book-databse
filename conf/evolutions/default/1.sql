@@ -4,27 +4,22 @@
 # --- !Ups
 
 create table t_book (
-  book_id                   SERIAL not null,
+  book_id                   bigint not null,
   book_name                 varchar(255),
   rank                      integer,
-  introduced                timestamp,
-  discontinued              timestamp,
+  categcory_id              bigint,
+  comment                   varchar(255),
+  amazon_uri                varchar(255),
+  recorded_on               timestamp not null,
+  updated_on                timestamp not null,
   constraint pk_t_book primary key (book_id))
 ;
 
-create table company (
-  id                        bigint not null,
-  name                      varchar(255),
-  constraint pk_company primary key (id))
-;
-
-create table computer (
-  id                        bigint not null,
-  name                      varchar(255),
-  introduced                timestamp,
-  discontinued              timestamp,
-  company_id                bigint,
-  constraint pk_computer primary key (id))
+create table t_category (
+  category_id               bigint not null,
+  subject                   varchar(255),
+  sort_order                integer,
+  constraint pk_t_category primary key (category_id))
 ;
 
 create table account (
@@ -34,16 +29,14 @@ create table account (
   constraint pk_account primary key (email))
 ;
 
-create sequence t_book_seq;
+create sequence book_id_seq;
 
-create sequence company_seq;
-
-create sequence computer_seq;
+create sequence category_id_seq;
 
 create sequence account_seq;
 
-alter table computer add constraint fk_computer_company_1 foreign key (company_id) references company (id);
-create index ix_computer_company_1 on computer (company_id);
+alter table t_book add constraint fk_t_book_category_1 foreign key (categcory_id) references t_category (category_id);
+create index ix_t_book_category_1 on t_book (categcory_id);
 
 
 
@@ -51,17 +44,13 @@ create index ix_computer_company_1 on computer (company_id);
 
 drop table if exists t_book cascade;
 
-drop table if exists company cascade;
-
-drop table if exists computer cascade;
+drop table if exists t_category cascade;
 
 drop table if exists account cascade;
 
-drop sequence if exists t_book_seq;
+drop sequence if exists book_id_seq;
 
-drop sequence if exists company_seq;
-
-drop sequence if exists computer_seq;
+drop sequence if exists category_id_seq;
 
 drop sequence if exists account_seq;
 

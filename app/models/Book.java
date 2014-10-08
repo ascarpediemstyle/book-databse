@@ -1,13 +1,19 @@
 package models;
 
 import java.util.*;
+import java.sql.Timestamp;
+
 import javax.persistence.*;
 
+import models.Category.TblDef;
 import play.db.ebean.*;
 import play.data.format.*;
 import play.data.validation.*;
 
 import com.avaje.ebean.*;
+import com.avaje.ebean.annotation.CreatedTimestamp;
+import com.avaje.ebean.annotation.UpdatedTimestamp;
+
 
 @Entity 
 @Table(name=Book.TblDef.TABLE_NAME) 
@@ -19,10 +25,20 @@ public class Book extends Model {
 	 public static final String TABLE_NAME = "t_book";
 	 public static final String BOOK_ID = "book_id";
 	 public static final String BOOK_NAME = "book_name";
+	 public static final String CATEGORY_ID = "categcory_id";
+	 public static final String RANK = "rank";
+	 public static final String COMMENT = "comment";
+	 public static final String AMAZON_URI = "amazon_uri";
+	 public static final String RECORDED_ON = "recorded_on";	 
   }
 
-  @Id
-  @Column(name=TblDef.BOOK_ID, columnDefinition="SERIAL")
+ 
+ 
+  @Id  
+  @SequenceGenerator(name=TblDef.BOOK_ID + "_gen",sequenceName=TblDef.BOOK_ID + "_seq", allocationSize = 1, initialValue = 1 )
+  @GeneratedValue(strategy=GenerationType.SEQUENCE, generator=TblDef.BOOK_ID + "_gen")  
+  @Column(name=TblDef.BOOK_ID) 
+  //@Column(name=TblDef.BOOK_ID, columnDefinition="bigserial")
   public Long bookId;
   
   @Constraints.Required
@@ -32,11 +48,21 @@ public class Book extends Model {
   @Constraints.Required  
   public int rank;
   
-  @Formats.DateTime(pattern="yyyy-MM-dd")
-  public Date introduced;
+  @ManyToOne  
+  @JoinColumn(name=TblDef.CATEGORY_ID )  
+  public Category category;
   
-  @Formats.DateTime(pattern="yyyy-MM-dd")
-  public Date discontinued;  
+  public String comment;  
+  
+  @Column(name=TblDef.AMAZON_URI)
+  public String amazonUri;
+  
+  @CreatedTimestamp
+  public Timestamp recordedOn; 
+  
+  @UpdatedTimestamp
+  public Timestamp updatedOn; 
+ 
  
     
   public static Finder<Long, Book> find = new Finder<Long, Book>(
@@ -55,10 +81,18 @@ public class Book extends Model {
   public static Page<Book> page(int page, int pageSize, String sortBy, String order, String filter) {
       return 
           find.where()
-              .ilike("book_name", "%" + filter + "%")
+              .ilike(TblDef.BOOK_NAME, "%" + filter + "%")
               .orderBy(sortBy + " " + order)              
               .findPagingList(pageSize)              
               .getPage(page);
+  }
+  
+  public static Map<String,String> rankOptions() {
+      LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+      for(int i=1;i<6;++i){
+          options.put(String.valueOf(i),String.valueOf(i));
+      }
+      return options;
   }
 
 

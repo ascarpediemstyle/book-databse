@@ -22,6 +22,10 @@ public class SessionManager  {
 		return Controller.ctx().session().get(TermDef.UserEmail.getName());
 	}
 	
+	public static boolean logined(){
+		return getUserEmail()!=null;
+	}
+	
 	public static void putValue(TermDef term,String value){
 		Controller.ctx().session().put(term.getName(),value);
 	}

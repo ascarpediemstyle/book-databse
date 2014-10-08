@@ -16,7 +16,7 @@ GET     /logout                             controllers.Application.logout()
 # Projects
 #POST    /projects                           controllers.Projects.add()
 
-# Computers list (look at the default values for pagination parameters)
+# Book list (look at the default values for pagination parameters)
 GET     /books                  controllers.Books.list(p:Int ?= 0, s ?= "book_name", o ?= "asc", f ?= "")
 
 
@@ -25,8 +25,11 @@ GET     /books/new              controllers.Books.create()
 POST    /books                  controllers.Books.save()
 
 # Edit existing computer
-GET     /books/:id              controllers.Books.edit(id:Long)
-POST    /books/:id              controllers.Books.update(id:Long)
+GET     /books/:id/edit              controllers.Books.edit(id:Long)
+POST    /books/:id/update              controllers.Books.update(id:Long)
+
+# Ref existing computer
+GET     /books/:id              controllers.Books.ref(id:Long)
 
 # Delete a computer
 POST    /books/:id/delete       controllers.Books.delete(id:Long)

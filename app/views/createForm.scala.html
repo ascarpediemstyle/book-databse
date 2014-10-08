@@ -12,16 +12,23 @@
         
         <fieldset>
         
-            @inputText(bookForm("bookName"), '_label -> "Book name")
-            @inputText(bookForm("introduced"), '_label -> "Introduced date")
-            @inputText(bookForm("discontinued"), '_label -> "Discontinued date")
-
-            <!-- select(
-                bookForm("company.id"), 
-                options(Company.options), 
-                '_label -> "Company", '_default -> "-- Choose a company --",
-                '_showConstraints -> false
-            ) -->
+            @inputText(bookForm("bookName"), '_label -> "本の名前")
+	         
+	        @select(
+                bookForm(Book.TblDef.RANK),
+                options(Book.rankOptions),
+                '_label -> "評価", '_default -> "-- Choose a rank --",
+                '_showConstraints -> true
+            ) 
+            
+            @select(
+                bookForm(Book.TblDef.CATEGORY_ID),
+                options(Category.options), 
+                '_label -> "Category", '_default -> "-- Choose a category --",
+                '_showConstraints -> true
+            ) 
+            
+            @textarea(bookForm(Book.TblDef.COMMENT), args = 'rows -> 3, 'cols -> 50, '_label -> "Comment")
             
 
         </fieldset>

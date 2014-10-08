@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.Page[Book],currentSortBy :String , currentOrder :String,currentFilter :String)
+@(currentPage: com.avaje.ebean.Page[Book],currentSortBy :String , currentOrder :String,currentFilter :String,logined:Boolean)
 
 
 
@@ -39,7 +39,7 @@
     </th>
 }
 
-@main() {
+@main {
     
     <h1 id="homeTitle">@Messages("books.list.title", currentPage.getTotalRowCount)</h1>
 
@@ -51,12 +51,12 @@
 
     <div id="actions">
         
-        <form action="@link(0, "book_name")" method="GET">
+        <form action="@link(0, Book.TblDef.BOOK_NAME)" method="GET">
             <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by computer name...">
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
         </form>
         
-        <a class="btn success" id="add" href="@routes.Books.create()">Add a new computer</a>
+        <a class="btn success" id="add" href="@routes.Books.create()">Add a new book</a>
         
     </div>
     
@@ -74,6 +74,7 @@
                     @header("bookName", "Book name")
                     @header("introduced", "Introduced")
                     @header("discontinued", "Discontinued")
+                    @header("discontinued", "Discontinued")
                     
                 </tr>
             </thead>
@@ -81,28 +82,36 @@
 
                 @for(book <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Books.edit(book.bookId)">@book.bookName</a></td>
                         <td>
-                            @if(book.introduced == null) {
+                        	@if(logined){
+	                        	<a href="@routes.Books.edit(book.bookId)">@book.bookName</a>  
+	                        } else{
+	                        	<a href="@routes.Books.ref(book.bookId)">@book.bookName</a>	                        
+	                        }                   
+                        </td> 
+                        <td>
+                            @if(book.rank == null) {
                                 <em>-</em>
                             } else {
-                                @book.introduced.format("dd MMM yyyy")
+                                @book.rank
+                            }
+                        </td> 
+                        
+                        <td>
+                            @if(book.recordedOn == null) {
+                                <em>-</em>
+                            } else {
+                                @book.recordedOn.format("yyyy/MM/dd")
                             }
                         </td>
+                        
                         <td>
-                            @if(book.discontinued == null) {
+                            @if(book.amazonUri == null) {
                                 <em>-</em>
                             } else {
-                                @book.discontinued.format("dd MMM yyyy")
+                                @book.amazonUri
                             }
                         </td>
-                        <!-- <td>
-                            if(book.company == null) {
-                                <em>-</em>
-                            } else {
-                                book.company.name
-                            }
-                        </td> -->
                     </tr>
                 }
 
