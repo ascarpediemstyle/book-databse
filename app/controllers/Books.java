@@ -10,6 +10,7 @@ import play.mvc.Security;
 import views.html.createForm;
 import views.html.editForm;
 import views.html.list;
+import views.html.refForm;
 
 
 public class Books extends Controller {
@@ -46,6 +47,11 @@ public class Books extends Controller {
      */
     @Security.Authenticated(Secured.class)
     public static Result edit(Long id) {
+    	
+    	if(!SessionManager.logined()){
+    		return ref(id);
+    	}
+    	
         Form<Book> bookForm = form(Book.class).fill(
             Book.find.byId(id)
         );
@@ -59,7 +65,7 @@ public class Books extends Controller {
             Book.find.byId(id)
         );
         return ok(
-            editForm.render(id, bookForm)
+            refForm.render(id, bookForm)
         );
     }
     

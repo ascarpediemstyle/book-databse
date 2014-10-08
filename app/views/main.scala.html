@@ -6,7 +6,15 @@
         <title>Books database</title>
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>        
+        <script src="@routes.Assets.at("javascript/Raterater-master/raterater.jquery.js")"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("javascript/Raterater-master/raterater.css")">
+       
+        
+        
         @*<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/book_main.css")">*@
+        
+ 
         
     </head>
     <body>
@@ -18,18 +26,32 @@
                   Play sample application &mdash; Book database
               </a>
           </h1>*@
-       
-   
             
             <dl id="user">
                 @*<dt>@user.name <span>(@user.email)</span></dt>*@
                 <dd>
-                    <a href="@routes.Application.logout()">Logout</a>
+                	@if(SessionManager.logined()){
+                    	<a href="@routes.Application.logout()">Logout</a>
+                    }else{
+                    	<a href="@routes.Application.login()">Login</a>                    
+                    }
                 </dd>
             </dl>
         </header>
         <nav>
             <h4 class="dashboard"><a href="#/">Dashboard</a></h4>
+            
+             <div class="ratebox" data-id="1" data-rating="3.7"></div>
+
+<script>
+function rateAlert(id, rating) {
+  alert( 'あなたがつけた評価は……星 '+rating+' です！' );
+}
+$(function() {
+  $( '.ratebox' ).raterater( { submitFunction: 'rateAlert', allowChange: true } );
+});
+</script>
+
             <ul id="projects">@*
                 @projects.groupBy(_.folder).map {
                     case (group, projects) => {
@@ -43,6 +65,9 @@
         <section id="main">
             @content
         </section>
+        
+        
+        
         
     </body>
 </html>

@@ -22,18 +22,18 @@ create table t_category (
   constraint pk_t_category primary key (category_id))
 ;
 
-create table account (
+create table t_account (
   email                     varchar(255) not null,
   name                      varchar(255),
   password                  varchar(255),
-  constraint pk_account primary key (email))
+  constraint pk_t_account primary key (email))
 ;
 
 create sequence book_id_seq;
 
 create sequence category_id_seq;
 
-create sequence account_seq;
+create sequence t_account_seq;
 
 alter table t_book add constraint fk_t_book_category_1 foreign key (categcory_id) references t_category (category_id);
 create index ix_t_book_category_1 on t_book (categcory_id);
@@ -46,11 +46,11 @@ drop table if exists t_book cascade;
 
 drop table if exists t_category cascade;
 
-drop table if exists account cascade;
+drop table if exists t_account cascade;
 
 drop sequence if exists book_id_seq;
 
 drop sequence if exists category_id_seq;
 
-drop sequence if exists account_seq;
+drop sequence if exists t_account_seq;
 

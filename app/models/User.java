@@ -11,7 +11,7 @@ import play.data.validation.*;
  * User entity managed by Ebean
  */
 @Entity 
-@Table(name="account")
+@Table(name="t_account")
 public class User extends Model {
 
     private static final long serialVersionUID = 1L;
