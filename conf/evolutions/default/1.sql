@@ -9,7 +9,7 @@ create table t_book (
   rank                      integer,
   categcory_id              bigint,
   comment                   varchar(255),
-  amazon_uri                varchar(255),
+  amazon_uri                varchar(2048),
   recorded_on               timestamp not null,
   updated_on                timestamp not null,
   constraint pk_t_book primary key (book_id))
