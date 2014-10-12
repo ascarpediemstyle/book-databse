@@ -15,6 +15,7 @@
         @*<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/book_main.css")">*@
         
  
+     
         
     </head>
     <body>
@@ -40,17 +41,7 @@
         </header>
         <nav>
             <h4 class="dashboard"><a href="#/">Dashboard</a></h4>
-            
-             <div class="ratebox" data-id="1" data-rating="3.7"></div>
 
-<script>
-function rateAlert(id, rating) {
-  alert( 'あなたがつけた評価は……星 '+rating+' です！' );
-}
-$(function() {
-  $( '.ratebox' ).raterater( { submitFunction: 'rateAlert', allowChange: true } );
-});
-</script>
 
             <ul id="projects">@*
                 @projects.groupBy(_.folder).map {

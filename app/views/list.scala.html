@@ -70,13 +70,14 @@
         
     } else {
         
+        <CENTER>
         <table class="computers zebra-striped">
             <thead>
                 <tr>
                     @header("bookName", "Book name")
-                    @header("introduced", "Introduced")
-                    @header("discontinued", "Discontinued")
-                    @header("discontinued", "Discontinued")
+                    @header("rnak", "評価")
+                    @header("createdOn", "登録日")
+                    @header("amazonUri", "Amazon")
                     
                 </tr>
             </thead>
@@ -111,7 +112,7 @@
                             @if(book.amazonUri == null) {
                                 <em>-</em>
                             } else {
-                                @book.amazonUri
+                                @Html(book.amazonUri)
                             }
                         </td>
                     </tr>
@@ -119,6 +120,7 @@
 
             </tbody>
         </table>
+        </CENTER>
 
         <div id="pagination" class="pagination">
             <ul>

@@ -54,7 +54,8 @@ public class Book extends Model {
   
   public String comment;  
   
-  @Column(name=TblDef.AMAZON_URI)
+  
+  @Column(name=TblDef.AMAZON_URI,length=2048)
   public String amazonUri;
   
   @CreatedTimestamp

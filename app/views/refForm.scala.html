@@ -1,0 +1,39 @@
+@(id: Long, bookForm: Form[Book])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Ref book</h1>
+    
+    @form(routes.Books.update(id)) {
+     <div>   
+	     <fieldset>
+	     
+	         @inputText(bookForm("bookName"), '_label -> "本の名前", 'readonly -> "readonly",  '_help -> " This is read only")
+	         @inputText(bookForm("recordedOn"), '_label -> "登録日", 'readonly -> "readonly",  '_help -> " This is read only")
+	         @inputText(bookForm("rank"), '_label -> "評価", 'readonly -> "readonly",  '_help -> " This is read only")
+	         
+	         <!-- select(
+	             computerForm("company.id"), 
+	             options(Company.options), 
+	             '_label -> "Company", '_default -> "-- Choose a company --",
+	             '_showConstraints -> false
+	         ) -->
+	     
+	     </fieldset>
+     </div>
+     	
+     <div>
+     	@Html(bookForm("amazonUri").value())   
+     </div>
+     
+     }
+     
+     <div class="actions">            
+         <a href="@routes.Books.list()" class="btn">back</a> 
+     </div>
+       
+}
