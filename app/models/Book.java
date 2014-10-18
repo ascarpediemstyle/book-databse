@@ -20,12 +20,13 @@ import com.avaje.ebean.annotation.UpdatedTimestamp;
 public class Book extends Model {
   
   private static final long serialVersionUID = 1L;
+  public static final int TOP_BOOKS_NUM = 16;
   
   public static class TblDef{
 	 public static final String TABLE_NAME = "t_book";
 	 public static final String BOOK_ID = "book_id";
 	 public static final String BOOK_NAME = "book_name";
-	 public static final String CATEGORY_ID = "categcory_id";
+	 public static final String CATEGORY_ID = "category_id";
 	 public static final String RANK = "rank";
 	 public static final String COMMENT = "comment";
 	 public static final String AMAZON_URI = "amazon_uri";
@@ -87,6 +88,17 @@ public class Book extends Model {
               .findPagingList(pageSize)              
               .getPage(page);
   }
+
+    public static Page<Book> page(String target, int page, int pageSize, String sortBy, String order, String filter) {
+        return
+                find.where()
+                        .ilike(target, "%" + filter + "%")
+                        .orderBy(sortBy + " " + order)
+                        .findPagingList(pageSize)
+                        .getPage(page);
+    }
+
+
   
   public static Map<String,String> rankOptions() {
       LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
@@ -94,6 +106,32 @@ public class Book extends Model {
           options.put(String.valueOf(i),String.valueOf(i));
       }
       return options;
+  }
+  
+  public static List<Book> getTopBooks() {
+	  
+	  List<Book> books =  find.where()
+              .like(TblDef.AMAZON_URI,"%img%")
+              .orderBy(Book.TblDef.RECORDED_ON + " desc")              
+              .findPagingList(TOP_BOOKS_NUM)              
+              .getPage(0).getList();
+	  
+	  int diff = TOP_BOOKS_NUM - books.size();
+	  if( diff > 0){		 
+		 Random rnd = new Random();
+		 for(int i=0;i<diff;++i){
+			 int index = rnd.nextInt(books.size()) ;
+			 books.add(books.get(index));
+		 }
+	 }
+	  
+	  return books;
+  }
+  
+  public static String getImageFromAmazonUri(String uri){
+	  int start = uri.indexOf("<img");
+	  int end = uri.indexOf("</a>");
+	  return uri.substring(start,end);
   }
 
 

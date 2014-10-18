@@ -38,9 +38,10 @@
     </th>
 }
 
-@main {
-
+@main {				
+				
     <h1 id="homeTitle">@Messages("books.list.title", currentPage.getTotalRowCount)</h1>
+
 
     @if(flash.containsKey("success")) {
         <div class="alert-message warning">
@@ -70,13 +71,13 @@
         
     } else {
         
-        <CENTER>
-        <table class="computers zebra-striped">
+
+        <table class="computers zebra-striped books">
             <thead>
                 <tr>
                     @header("bookName", "Book name")
-                    @header("rnak", "評価")
-                    @header("createdOn", "登録日")
+                    @header("rank", "評価")
+                    @header("recordedOn", "登録日")
                     @header("amazonUri", "Amazon")
                     
                 </tr>
@@ -96,7 +97,7 @@
                             @if(book.rank == null) {
                                 <em>-</em>
                             } else {
-                                @book.rank
+                            	<div class="star" data-score="@book.rank" ></div>
                             }
                         </td> 
                         
@@ -109,18 +110,21 @@
                         </td>
                         
                         <td>
+                        	<div id="book_list_amazon">
                             @if(book.amazonUri == null) {
                                 <em>-</em>
                             } else {
                                 @Html(book.amazonUri)
                             }
+                            </div>
                         </td>
+                        
                     </tr>
                 }
 
             </tbody>
         </table>
-        </CENTER>
+
 
         <div id="pagination" class="pagination">
             <ul>

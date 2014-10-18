@@ -7,7 +7,7 @@ create table t_book (
   book_id                   bigint not null,
   book_name                 varchar(255),
   rank                      integer,
-  categcory_id              bigint,
+  category_id               bigint,
   comment                   varchar(255),
   amazon_uri                varchar(2048),
   recorded_on               timestamp not null,
@@ -31,12 +31,12 @@ create table t_account (
 
 create sequence book_id_seq;
 
-create sequence category_id_seq;
+create sequence t_category_seq;
 
 create sequence t_account_seq;
 
-alter table t_book add constraint fk_t_book_category_1 foreign key (categcory_id) references t_category (category_id);
-create index ix_t_book_category_1 on t_book (categcory_id);
+alter table t_book add constraint fk_t_book_category_1 foreign key (category_id) references t_category (category_id);
+create index ix_t_book_category_1 on t_book (category_id);
 
 
 
@@ -50,7 +50,7 @@ drop table if exists t_account cascade;
 
 drop sequence if exists book_id_seq;
 
-drop sequence if exists category_id_seq;
+drop sequence if exists t_category_seq;
 
 drop sequence if exists t_account_seq;
 

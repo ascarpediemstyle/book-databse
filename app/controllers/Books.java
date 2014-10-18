@@ -7,11 +7,10 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.createForm;
-import views.html.editForm;
-import views.html.list;
-import views.html.refForm;
-
+import views.html.books.list;
+import views.html.books.editForm;
+import views.html.books.refForm;
+import views.html.books.createForm;
 
 public class Books extends Controller {
 	

@@ -1,3 +1,4 @@
+/*
 html {
     background: #eee;
 }
@@ -61,5 +62,89 @@ table.computers .header a {
 #pagination ul .current a {
     color: #666;
 }
+
+
+*/
+.book_content{
+	float:left;
+	padding-right:100px;
+	width:400px;
+	height:150px;
+	/*background:#eeeeee;*/
+}
+
+.book_amazon{
+	height:250px;
+}
+
+div.book_comment textarea{	
+	width:500px;
+	height:250px;
+}
+
+div.book_amazon img{
+	width:auto;
+	height:200px;
+}
+
+table.books #book_list_amazon img{
+	width:auto;
+	height:70px;
+}
+
+#top_img img{
+	width:auto;
+	height:350px;
+}
+
+#top_comment{
+	text-align: center;
+	color: #616161 ;	
+	font-size: 36px; 
+	text-shadow: 0 15px 10px rgba(0,0,0,0.5),
+	1px 1px 1px rgba(0, 0, 0, 0.6),
+	-1px -1px 1px rgba(255, 255, 255, 0.5);
+}
+
+#menu ul{
+list-style: none; 
+padding:0;
+margin:0;
+}
+#menu li{
+padding: 0; 
+margin: 0;
+float: left;
+}
+#menu li a{
+display: block;
+width: 80px;
+border-bottom: 1px dotted #FFF;
+text-decoration: none;
+color: #FFF;
+padding: 0px 0px 0px 20px;
+margin: 0px 2px;
+text-align: left;
+font-size: 14px;
+}
+#menu li a:hover{
+border: inset 3px #FFFFFF;
+background-color: #445868;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

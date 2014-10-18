@@ -1,0 +1,80 @@
+@(id: Long, bookForm: Form[Book])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+ 
+        
+@main {
+			
+    <!-- <h1>bookForm("bookName").value()</h1> -->
+    <h1>本の紹介</h1>
+    @form(routes.Books.update(id)) {
+     <div class="book_content">   
+	     <fieldset>
+	     
+		     <div class="clearfix ">
+			    <label for="rank">タイトル</label>
+			    <div class="input">
+			    	@bookForm("bookName").value()
+			    </div>
+			 </div>
+	     	
+	         
+			 
+			 @*@inputText(bookForm("recordedOn"), '_label -> "登録日", 'readonly -> "readonly",  '_help -> " This is read only")*@
+	         
+
+			<div class="clearfix ">
+			    <label for="rank">登録日</label>
+			    <div class="input">
+			    	@bookForm("recordedOn").value
+			    </div>
+			 </div>
+			 
+			<div class="clearfix ">
+			    <label for="rank">評価</label>
+			    <div class="input">
+			    	<div class="star" data-score="@bookForm("rank").value()"></div>
+			    </div>
+			 </div>
+	         
+			
+			
+	         <!-- select(
+	             computerForm("company.id"), 
+	             options(Company.options), 
+	             '_label -> "Company", '_default -> "-- Choose a company --",
+	             '_showConstraints -> false
+	         ) -->
+	     
+	     </fieldset>
+     </div>
+     	
+     <div class="book_amazon">
+     	@Html(bookForm("amazonUri").value())   
+     	
+     </div>
+     
+         
+     <div class="book_comment">
+     	@textarea(bookForm(Book.TblDef.COMMENT), 'readonly -> "readonly",  '_label -> "コメント",'_help -> " This is read only")
+     </div>
+     
+     
+		
+     
+     }
+     
+     
+     
+     <div class="actions">            
+         <a href="@routes.Books.list()" class="btn">back</a> 
+     </div>
+     
+     
+     
+</div>
+       
+}

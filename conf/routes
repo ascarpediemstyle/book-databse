@@ -3,7 +3,7 @@
 # ~~~~
 
 # The home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Application.top()
 
 # Authentication
 GET     /login                              controllers.Application.login()

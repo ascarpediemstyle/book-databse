@@ -5,6 +5,7 @@ import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
 import views.html.*;
+import views.html.books.list;
 import models.*;
 
 /**
@@ -76,6 +77,14 @@ public class Application extends Controller {
      */
     public static Result index() {
         return GO_HOME;
+    }
+    
+    public static Result top() {    	
+    	return ok(
+    			top.render(
+    	                Book.getTopBooks()
+    	            )
+            );
     }
     
 }

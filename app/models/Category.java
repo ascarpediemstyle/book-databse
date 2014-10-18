@@ -29,13 +29,9 @@ public class Category extends Model {
 	 public static final String SORT_ORDER = "sort_order";
 	 
   }
-
   
   
-  
-  @Id  
-  @SequenceGenerator(name=TblDef.CATEGORY_ID + "_gen",sequenceName=TblDef.CATEGORY_ID + "_seq", allocationSize = 1, initialValue = 1 )
-  @GeneratedValue(strategy=GenerationType.SEQUENCE, generator=TblDef.CATEGORY_ID + "_gen")  
+  @Id
   @Column(name=TblDef.CATEGORY_ID) 
   public long categoryId; 
   
@@ -53,8 +49,6 @@ public class Category extends Model {
   /**
    * Return a page of computer
    *
-   * @param page Page to display
-   * @param pageSize Number of computers per page
    * @param sortBy Computer property used for sorting
    * @param order Sort order (either or asc or desc)
    * @param filter Filter applied on the name column

@@ -1,1 +1,0 @@
-insert into t_account values('a@a.com','i','a');

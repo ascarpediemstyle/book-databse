@@ -4,19 +4,36 @@
 <html>
     <head>
         <title>Books database</title>
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>        
-        <script src="@routes.Assets.at("javascript/Raterater-master/raterater.jquery.js")"></script>
-        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("javascript/Raterater-master/raterater.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/book_main.css")">
+     	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">       
+	
+<script type="text/javascript">
+	<!--
+		if (top.location!= self.location) {
+			top.location = self.location.href
+		}
+	//-->
+</script> 
+	
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
        
-        
-        
-        @*<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/book_main.css")">*@
-        
- 
-     
-        
+	    <script src="@routes.Assets.at("javascript/jquery-1.11.1.js")"></script>
+        <script src="@routes.Assets.at("javascript/jquery-migrate-1.2.1.js")"></script>
+	    <script src="@routes.Assets.at("javascript/raty/jquery.raty.js")"></script>
+	    <script type="text/javascript">
+		    $(function() {					
+		            $('.star').raty( {
+		             readOnly: true,
+		             noRatedMsg : "I haven't rated yet!",
+		             score: function() {
+		                return $(this).attr('data-score');
+		             },
+		             path:  "@routes.Assets.at("javascript/raty/images")"
+					});
+			});
+		</script>		
+		
     </head>
     <body>
     
@@ -34,31 +51,47 @@
                 	@if(SessionManager.logined()){
                     	<a href="@routes.Application.logout()">Logout</a>
                     }else{
-                    	<a href="@routes.Application.login()">Login</a>                    
+                    	<!-- <a href="@routes.Application.login()">Login</a>   -->                  
                     }
                 </dd>
             </dl>
+            
+            
+            
+            <div id="menu">
+	            <ul>
+					<li><a href="@routes.Application.top()">TOP</a></li>
+					<li><a href="@routes.Books.list()">BOOKS</a></li>
+					<li><a href="#">MESSAGES</a></li>
+					<li><a href="#">ABOUT</a></li>
+				</ul> 
+			</div>
+	
         </header>
+        
+        
+       
+       @*
         <nav>
             <h4 class="dashboard"><a href="#/">Dashboard</a></h4>
 
 
-            <ul id="projects">@*
+            <ul id="projects">
                 @projects.groupBy(_.folder).map {
                     case (group, projects) => {
                         @views.html.projects.group(group, projects)
                     }
-                }*@
+                }
             </ul>
             <button id="newGroup">New group</button>
         </nav>
-        
+		 *@ 
+		 
+		 
         <section id="main">
+                
             @content
         </section>
-        
-        
-        
         
     </body>
 </html>

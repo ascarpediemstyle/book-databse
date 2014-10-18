@@ -12,16 +12,16 @@
         
         <fieldset>
         
-           		@inputText(bookForm("bookName"), '_label -> "本の名前")
-	         	@inputText(bookForm("recordedOn"), '_label -> "登録日")
-	        	@inputText(bookForm("rank"), '_label -> "評価")
-	         
-            <!-- select(
-                computerForm("company.id"), 
-                options(Company.options), 
-                '_label -> "Company", '_default -> "-- Choose a company --",
-                '_showConstraints -> false
-            ) -->
+            @inputText(bookForm("bookName"), '_label -> "本の名前")
+            @inputText(bookForm("rank"), '_label -> "評価")
+            @select(
+                bookForm(Book.TblDef.CATEGORY_ID),
+                options(Category.options),
+                '_label -> "Category", '_default -> "-- Choose a category --",
+                '_showConstraints -> true
+            )
+
+
         
         </fieldset>
         
